@@ -73,7 +73,6 @@ int main (int ac, char **av, char **env){
 		getline(&line, &len, stdin);
 		if(!line[0] || !strcmp(line,"exit\n"))
 		{
-			printf("\n");
 			break;
 		}
 		prepcmd(line, split);
