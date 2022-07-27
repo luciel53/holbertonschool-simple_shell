@@ -1,8 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
-#include<readline/readline.h>
-#include<readline/history.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -34,26 +32,26 @@ int execute (char **argv, char **env)
 		execve(argv[0], argv, env);
 	}
 	wait(&status);
-	
 	return (0);
 }
 
 char *checkFile(char *File)
 {   
-    struct stat st;
-    char *res;
+    	struct stat st;
+   	char *res;
     
-    res = malloc(strlen(File) + 6);
-    strncat(res, "/bin/",6);
-    strncat(res, File, strlen(File));
-    if (stat(File, &st) == 0) 
-    {
-       return (File);
-    }
-    if (stat(res, &st) == 0)
-    {
-        free (File);
-        return(res);
-    }
-    return (NULL);
+    	if (stat(File, &st) == 0) 
+    	{
+       		return (File);
+    	}
+	res = malloc(strlen(File) + 6);
+    	strncat(res, "/bin/",6);
+    	strncat(res, File, strlen(File));
+    	free (File);
+    	if (stat(res, &st) == 0)
+    	{
+        	return(res);
+    	}
+	free (res);
+    	return (NULL);
 }

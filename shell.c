@@ -2,8 +2,6 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include <string.h>
-#include<readline/readline.h>
-#include<readline/history.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include"main.h"
@@ -60,7 +58,7 @@ int main (int ac, char **av, char **env){
 	char hostname[200];
 	char *line = NULL;
 	size_t len = 0;
-	/*int i;*/
+	int i;
 	char **split = malloc (sizeof(char*) * 200);
 
 	if (ac != 1 && av[0])
@@ -88,9 +86,12 @@ int main (int ac, char **av, char **env){
 		}
 		if (execute(split,env) == - 1)
 			printf("Error: command not found\n");
+		for (i = 0; split[i]; i++)
+			free (split[i]);
 		memset(split, '\0', 200);
 		line[0] = 0;
 	}
+	free(split);
 	free(line);
 	return (0);
 }
