@@ -84,7 +84,7 @@ int main (int ac, char **av, char **env){
 			continue;
 		}
 		if (execute(split,env) == - 1)
-			dprintf("%s: 1: %s:not found\n", av[0], split[0]);
+			dprintf(STDERR_FILENO, "%s: 1: %s:not found\n", av[0], split[0]);
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
