@@ -19,23 +19,22 @@ int execute (char **argv, char **env)
 {
 	pid_t child_pid;
 	int status;
-	int i = 0;
 
-    argv[0] = checkFile(argv[0]);
-	for (i = 0 ; i < 1 ; i++)
+    	argv[0] = checkFile(argv[0]);
+	if (!argv[0])
+		return (-1);
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-		child_pid = fork();
-		if (child_pid == -1)
-		{
-			perror("Error");
-			return (-1);
-		}
-		if (child_pid == 0)
-		{
-			execve(argv[0], argv, env);
-		}
-		wait(&status);
+		perror("Error");
+		return (-1);
 	}
+	if (child_pid == 0)
+	{
+		execve(argv[0], argv, env);
+	}
+	wait(&status);
+	
 	return (0);
 }
 

@@ -68,21 +68,28 @@ int main (int ac, char **av, char **env){
 	usrName = getenv("USER");
 	path = getcwd(buf, lenPth);
 	gethostname(hostname, 201);
-	while (line == NULL || strcmp(line,"quit"))
+	while (line == NULL || strcmp(line,"exit"))
 	{
 		printf("%s@%s:%s$ ", usrName, hostname, path);
+		fflush(stdout);
 		getline(&line, &len, stdin);
-		if(!line[0])
+		if(!line[0] || !strcmp(line,"exit\n"))
+		{
+			printf("\n");
 			break;
+		}
 		prepcmd(line, split);
 		/*for (i = 0; split[i]; i ++)
 			printf("%s\n", split[i]);*/
 		if(!split[0])
 		{
+			line[0] = 0;
 			continue;
 		}
-		execute(split,env);
+		if (execute(split,env) == - 1)
+			printf("Error: command not found\n");
 		memset(split, '\0', 200);
+		line[0] = 0;
 	}
 	free(line);
 	return (0);
