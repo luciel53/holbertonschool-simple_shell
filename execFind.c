@@ -44,7 +44,7 @@ char *checkFile(char *File)
     	{
        		return (File);
     	}
-	res = malloc(strlen(File) + 6);
+	res = calloc(strlen(File) + 6, 1);
     	strncat(res, "/bin/",6);
     	strncat(res, File, strlen(File));
     	free (File);
