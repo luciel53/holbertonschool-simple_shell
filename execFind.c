@@ -7,19 +7,21 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include"main.h"
+
 /**
- * main - execve example
- *
+ * execute - A function that executes the program of the command given
+ * @argv: command
+ * @env: double pointer to the environnement variable
  * Return: Always 0.
  */
 
-int execute (char **argv, char **env)
+int execute (char **cmd, char **env)
 {
 	pid_t child_pid;
 	int status;
 
-    	argv[0] = checkFile(argv[0]);
-	if (!argv[0])
+	cmd[0] = checkFile(cmd[0]);
+	if (!cmd[0])
 		return (-1);
 	child_pid = fork();
 	if (child_pid == -1)
@@ -29,18 +31,24 @@ int execute (char **argv, char **env)
 	}
 	if (child_pid == 0)
 	{
-		execve(argv[0], argv, env);
+		execve(cmd[0], cmd, env);
 	}
 	wait(&status);
 	return (0);
 }
 
+/**
+ * *checkfile - A function that finds a file
+ * @File: the file we want to find
+ * Return: if the file is found in the current directory or in bin, return the
+ * 			result, else return NULL
+ */
 char *checkFile(char *File)
-{   
-    	struct stat st;
+{
+		struct stat st;
    	char *res;
-    
-    	if (stat(File, &st) == 0) 
+
+    	if (stat(File, &st) == 0)
     	{
        		return (File);
     	}
