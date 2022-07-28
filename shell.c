@@ -108,14 +108,14 @@ int main (int ac, char **av, char **env){
 		strcpy(cmd,split[0]);
 		if (execute(split,env) == - 1)
 		{
-			dprintf(STDERR_FILENO, "%s: 1: %s:not found\n", av[0], cmd);
+			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", av[0], cmd);
 			ret = 127;
 		}
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
 		line[0] = 0;
-	}
+	}	
 	free(split);
 	free(line);
 	return (ret);
