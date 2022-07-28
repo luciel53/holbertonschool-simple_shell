@@ -19,13 +19,10 @@ int execute (char **cmd, char **env)
 {
 	pid_t child_pid;
 	int status;
-	char temp[200];
 
-	strcpy(temp,cmd[0]);
 	cmd[0] = checkFile(cmd[0], getenv("PATH"));
 	if (!cmd[0])
 	{
-		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", getenv("_"), temp);
 		return (127);
 	}
 	child_pid = fork();

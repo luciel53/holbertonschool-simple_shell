@@ -80,6 +80,7 @@ int main (int ac, char **av, char **env){
 	size_t len = 0;
 	int i;
 	int err = 0;
+	char *cmd = malloc(200);
 	char **split = calloc (200, 1);
 
 	if (ac != 1 && av[0])
@@ -97,6 +98,7 @@ int main (int ac, char **av, char **env){
 			break;
 		}
 		prepcmd(line, split);
+		strcpy(cmd,split[0]);
 		/*for (i = 0; split[i]; i ++)
 			printf("%s\n", split[i]);*/
 		if(!split[0])
@@ -105,11 +107,14 @@ int main (int ac, char **av, char **env){
 			continue;
 		}
 		err = execute(split, env);
+		if (err == 127)
+			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", av[0], cmd);
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
 		line[0] = 0;
-	}	
+	}
+	free (cmd);	
 	free(split);
 	free(line);
 	return (err);
