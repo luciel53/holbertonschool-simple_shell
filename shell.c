@@ -20,13 +20,13 @@ void strcut(char *str, char **res, int *p)
 	char *saveptr;
 	char *pch;
 
-	pch = strtok_r (str," \n", &saveptr);
+	pch = strtok_r (str, " \n", &saveptr);
 	while (pch != NULL)
 	{
 		res[*p] = malloc(strlen(pch) + 1);
 		strcpy(res[*p], pch);
 		(*p)++;
-		pch = strtok_r (NULL, " \n",&saveptr);
+		pch = strtok_r (NULL, " \n" ,&saveptr);
 	}
 }
 
@@ -103,7 +103,7 @@ int main (int ac, char **av, char **env){
 			line[0] = 0;
 			continue;
 		}
-		if (execute(split, env) == - 1)
+		execute(split, env);
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);

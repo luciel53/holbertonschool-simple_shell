@@ -35,7 +35,7 @@ int execute (char **cmd, char **env)
 	}
 	if (child_pid == 0)
 	{
-		exit (execve(cmd[0], cmd, env));
+		execve(cmd[0], cmd, env);
 	}
 	wait(&status);
 	return (status);
@@ -48,26 +48,43 @@ int execute (char **cmd, char **env)
  * Return: if the file is found in the current directory or in bin, return the
  * 	result, else return NULL
  */
-char *checkFile(char *File, char* PATH)
+char *checkFile(char *File, char *PATH)
 {
 	struct stat st;
    	char *res;
+	int i = 0;
+	char *path;
+	int imax = strlen(PATH); 
 
-	res = calloc(strlen(File) + strlen(PATH) + 1, 1);
-    	strncat(res, PATH, strlen(PATH));
-    	strncat(res, File, strlen(File));
     	if (stat(File, &st) == 0)
     	{
        		return (File);
     	}
-	res = calloc(strlen(File) + 6, 1);
-    	strncat(res, "/bin/",6);
-    	strncat(res, File, strlen(File));
+	path = malloc(strlen(PATH) + 1);
+	strcpy(path,PATH);
+	for (i = 0; i < imax; i++)
+	{
+		if (path[i] == ':')
+			path[i] = '\0';
+	}
+	res = calloc(200,1);
+	for (i = 0; i < imax && path[i]; i += strlen(path + i) + 1)
+	{
+		strcpy(res, path + i);
+		strcat(res, "/");
+    		strcat(res, File);
+		printf("%s\n",res);
+		if (stat(res, &st) == 0)
+    		{
+			free (File);
+			free (path);
+        		return(res);
+    		}
+		printf("%s\n", path + i);
+	}
+	free(path);
     	free (File);
-    	if (stat(res, &st) == 0)
-    	{
-        	return(res);
-    	}
 	free (res);
     	return (NULL);
 }
+
