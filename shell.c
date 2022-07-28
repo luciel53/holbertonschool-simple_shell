@@ -76,11 +76,9 @@ int main (int ac, char **av, char **env){
 	char *usrName;
 	char *path;
 	char hostname[200];*/
-	int ret = 0;
 	char *line = NULL;
 	size_t len = 0;
 	int i;
-	char cmd[200]; 
 	char **split = calloc (200, 1);
 
 	if (ac != 1 && av[0])
@@ -105,12 +103,7 @@ int main (int ac, char **av, char **env){
 			line[0] = 0;
 			continue;
 		}
-		strcpy(cmd,split[0]);
-		if (execute(split,env) == - 1)
-		{
-			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", av[0], cmd);
-			ret = 127;
-		}
+		if (execute(split, env) == - 1)
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
@@ -118,5 +111,5 @@ int main (int ac, char **av, char **env){
 	}	
 	free(split);
 	free(line);
-	return (ret);
+	return (0);
 }

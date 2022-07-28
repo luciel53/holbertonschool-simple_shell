@@ -19,35 +19,43 @@ int execute (char **cmd, char **env)
 {
 	pid_t child_pid;
 	int status;
+	char temp[200];
 
-	cmd[0] = checkFile(cmd[0]);
+	strcpy(temp,cmd[0]);
+	cmd[0] = checkFile(cmd[0], getenv("PATH"));
 	if (!cmd[0])
-		return (-1);
+	{
+		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", getenv("_"), temp);
+		return (127);
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		perror("Error");
-		return (-1);
+		return(-1);
 	}
 	if (child_pid == 0)
 	{
-		execve(cmd[0], cmd, env);
+		exit (execve(cmd[0], cmd, env));
 	}
 	wait(&status);
-	return (0);
+	return (status);
 }
 
 /**
- * *checkfile - A function that finds a file
+ **checkfile - A function that finds a file
  * @File: the file we want to find
+ * @PATH: current path
  * Return: if the file is found in the current directory or in bin, return the
- * 			result, else return NULL
+ * 	result, else return NULL
  */
-char *checkFile(char *File)
+char *checkFile(char *File, char* PATH)
 {
-		struct stat st;
+	struct stat st;
    	char *res;
 
+	res = calloc(strlen(File) + strlen(PATH) + 1, 1);
+    	strncat(res, PATH, strlen(PATH));
+    	strncat(res, File, strlen(File));
     	if (stat(File, &st) == 0)
     	{
        		return (File);
