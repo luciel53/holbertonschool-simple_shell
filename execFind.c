@@ -73,14 +73,12 @@ char *checkFile(char *File, char *PATH)
 		strcpy(res, path + i);
 		strcat(res, "/");
     		strcat(res, File);
-		printf("%s\n",res);
 		if (stat(res, &st) == 0)
     		{
 			free (File);
 			free (path);
         		return(res);
     		}
-		printf("%s\n", path + i);
 	}
 	free(path);
     	free (File);

@@ -79,6 +79,7 @@ int main (int ac, char **av, char **env){
 	char *line = NULL;
 	size_t len = 0;
 	int i;
+	int err = 0;
 	char **split = calloc (200, 1);
 
 	if (ac != 1 && av[0])
@@ -103,7 +104,7 @@ int main (int ac, char **av, char **env){
 			line[0] = 0;
 			continue;
 		}
-		execute(split, env);
+		err = execute(split, env);
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
@@ -111,5 +112,5 @@ int main (int ac, char **av, char **env){
 	}	
 	free(split);
 	free(line);
-	return (0);
+	return (err);
 }
