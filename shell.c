@@ -6,6 +6,15 @@
 #include <sys/wait.h>
 #include"main.h"
 
+/**
+ * strcut - A function that cuts the string at spaces and line returns and
+ * 			put its result in an array
+ * @str: pointer to a string that we want to cut
+ * @res: array of string to edit
+ * @p: position in array from which we have to add
+ * Return: void
+ */
+
 void strcut(char *str, char **res, int *p)
 {
 	char *saveptr;
@@ -20,6 +29,14 @@ void strcut(char *str, char **res, int *p)
 		pch = strtok_r (NULL, " \n",&saveptr);
 	}
 }
+
+/**
+ * prepcmd - A function that prepares the use of the command
+ * @str: pointer to a string that we want to cut
+ * @res: array of string to edit
+ * Return: void
+ */
+
 void prepcmd(char *str, char **res)
 {
 	char *pch;
@@ -32,7 +49,7 @@ void prepcmd(char *str, char **res)
 	{
 		if (even % 2 == 0)
 			strcut(pch, res, &p);
-		else 
+		else
 		{
 			res[p] = malloc(strlen(pch) + 1);
 			strcpy(res[p], pch);
@@ -45,8 +62,11 @@ void prepcmd(char *str, char **res)
 
 
 /**
- * main - executer la command entré par l'utilisateur
- * Return: 1
+ * main - A function that simukes the shell
+ * @ac: argument count
+ * @av: argument vector
+ * @env: double pointer to the environnement variable
+ * Return: 0 if it works or something else if not
  */
 
 
