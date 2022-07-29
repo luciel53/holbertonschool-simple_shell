@@ -20,7 +20,10 @@ int execute (char **cmd, char **env)
 	pid_t child_pid;
 	int status;
 
-	cmd[0] = checkFile(cmd[0], getenv("PATH"));
+	if (!getenv("PATH"))
+		cmd[0] = checkFile(cmd[0], "");
+	else
+		cmd[0] = checkFile(cmd[0], getenv("PATH"));
 	if (!cmd[0])
 	{
 		return (127);
