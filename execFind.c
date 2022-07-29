@@ -20,10 +20,7 @@ int execute (char **cmd, char **env)
 	pid_t child_pid;
 	int status;
 
-	if (!getenv("PATH"))
-		cmd[0] = checkFile(cmd[0], "");
-	else
-		cmd[0] = checkFile(cmd[0], getenv("PATH"));
+	cmd[0] = checkFile(cmd[0], getenv("PATH"));
 	if (!cmd[0])
 	{
 		return (127);
@@ -60,6 +57,11 @@ char *checkFile(char *File, char *PATH)
     	{
        		return (File);
     	}
+	if (!PATH)
+	{
+		free (File);
+		return (NULL);
+	}
 	path = malloc(strlen(PATH) + 1);
 	strcpy(path,PATH);
 	for (i = 0; i < imax; i++)
