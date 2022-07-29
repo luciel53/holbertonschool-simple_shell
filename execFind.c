@@ -45,7 +45,8 @@ int execute(char **cmd, char **env)
 	{
 		execve(cmd[0], cmd, env);
 	}
-	if (wait(&status))
+	wait(&status);
+	if (status)
 		return (2);
 	return (0);
 }
