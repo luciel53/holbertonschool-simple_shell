@@ -98,7 +98,6 @@ int main (int ac, char **av, char **env){
 			break;
 		}
 		prepcmd(line, split);
-		strcpy(cmd,split[0]);
 		/*for (i = 0; split[i]; i ++)
 			printf("%s\n", split[i]);*/
 		if(!split[0])
@@ -106,6 +105,7 @@ int main (int ac, char **av, char **env){
 			line[0] = 0;
 			continue;
 		}
+		strcpy(cmd,split[0]);
 		err = execute(split, env);
 		if (err == 127)
 			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", av[0], cmd);

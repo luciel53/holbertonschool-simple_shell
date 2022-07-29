@@ -35,6 +35,7 @@ int execute (char **cmd, char **env)
 		execve(cmd[0], cmd, env);
 	}
 	wait(&status);
+	/*printf("%d",status);*/
 	return (status);
 }
 
@@ -49,12 +50,20 @@ char *checkFile(char *File, char *PATH)
 {
 	struct stat st;
    	char *res;
-	int i = 0;
+	unsigned int i = 0;
+	int ispath = 0;
 	char *path;
-	int imax; 
+	unsigned int imax; 
 
     	if (stat(File, &st) == 0)
     	{
+		for (i = 0; i < strlen(File); i++)
+			ispath += (File[i] == '/');
+		if (!ispath)
+		{
+			free (File);
+			return (NULL);
+		}
        		return (File);
     	}
 	if (!PATH)
