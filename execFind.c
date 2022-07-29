@@ -10,12 +10,12 @@
 
 /**
  * execute - A function that executes the program of the command given
- * @argv: command
+ * @cmd: command
  * @env: double pointer to the environnement variable
  * Return: Always 0.
  */
 
-int execute (char **cmd, char **env)
+int execute(char **cmd, char **env)
 {
 	pid_t child_pid;
 	int status;
@@ -25,10 +25,10 @@ int execute (char **cmd, char **env)
 	if (!strcmp(cmd[0], "env"))
 	{
 		for (en = env; *en != 0; en++)
-  		{
-    			thisEnv = *en;
-    			printf("%s\n", thisEnv);    
-  		}
+		{
+			thisEnv = *en;
+			printf("%s\n", thisEnv);
+		}
 		return (0);
 	}
 	cmd[0] = checkFile(cmd[0], getenv("PATH"));
@@ -39,7 +39,7 @@ int execute (char **cmd, char **env)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		return(-1);
+		return (-1);
 	}
 	if (child_pid == 0)
 	{
@@ -51,57 +51,57 @@ int execute (char **cmd, char **env)
 }
 
 /**
- **checkfile - A function that finds a file
+ * *checkFile - A function that finds a file
  * @File: the file we want to find
  * @PATH: current path
  * Return: if the file is found in the current directory or in bin, return the
- * 	result, else return NULL
+ *	result, else return NULL
  */
 char *checkFile(char *File, char *PATH)
 {
 	struct stat st;
-   	char *res;
+	char *res;
 	unsigned int i = 0;
 	int ispath = 0;
 	char *path;
-	unsigned int imax; 
+	unsigned int imax;
 
-    	if (stat(File, &st) == 0)
-    	{
+		if (stat(File, &st) == 0)
+		{
 		for (i = 0; i < strlen(File); i++)
 			ispath += (File[i] == '/');
 		if (ispath)
-       			return (File);
-    	}
+			return (File);
+		}
 	if (!PATH)
 	{
-		free (File);
+		free(File);
 		return (NULL);
 	}
 	imax = strlen(PATH);
 	path = malloc(strlen(PATH) + 1);
-	strcpy(path,PATH);
+	strcpy(path, PATH);
 	for (i = 0; i < imax; i++)
 	{
 		if (path[i] == ':')
 			path[i] = '\0';
 	}
-	res = calloc(200,1);
+	res = calloc(200, 1);
 	for (i = 0; i < imax && path[i]; i += strlen(path + i) + 1)
 	{
 		strcpy(res, path + i);
 		strcat(res, "/");
-    		strcat(res, File);
+			strcat(res, File);
 		if (stat(res, &st) == 0)
-    		{
-			free (File);
-			free (path);
-        		return(res);
-    		}
+			{
+			free(File);
+			free(path);
+				return (res);
+			}
 	}
 	free(path);
-    	free (File);
-	free (res);
-    	return (NULL);
+		free(File);
+	free(res);
+		return (NULL);
 }
 
