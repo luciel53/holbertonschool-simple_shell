@@ -72,13 +72,7 @@ void prepcmd(char *str, char **res)
 
 int main(int ac, char **av, char **env)
 {
-	/*
-	* size_t lenPth = 201;
-	* char buf[200];
-	* char *usrName;
-	* char *path;
-	* char hostname[200];
-	*/
+
 	char *line = NULL;
 	size_t len = 0;
 	int i;
@@ -88,14 +82,9 @@ int main(int ac, char **av, char **env)
 
 	if (ac != 1 && av[0])
 		return (-1);
-	/*
-	* usrName = getenv("USER");
-	* path = getcwd(buf, lenPth);
-	* gethostname(hostname, 201);
-	*/
+
 	while (line == NULL || strcmp(line, "exit"))
 	{
-		/*printf("%s@%s:%s$ ", usrName, hostname, path);*/
 		fflush(stdout);
 		getline(&line, &len, stdin);
 		if (!line[0] || !strcmp(line, "exit\n"))
@@ -103,10 +92,6 @@ int main(int ac, char **av, char **env)
 			break;
 		}
 		prepcmd(line, split);
-		/*
-		* for (i = 0; split[i]; i ++)
-			* printf("%s\n", split[i]);
-			*/
 		if (!split[0])
 		{
 			line[0] = 0;
