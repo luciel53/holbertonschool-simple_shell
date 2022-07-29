@@ -20,13 +20,13 @@ void strcut(char *str, char **res, int *p)
 	char *saveptr;
 	char *pch;
 
-	pch = strtok_r (str," \n", &saveptr);
+	pch = strtok_r (str, " \n", &saveptr);
 	while (pch != NULL)
 	{
 		res[*p] = malloc(strlen(pch) + 1);
 		strcpy(res[*p], pch);
 		(*p)++;
-		pch = strtok_r (NULL, " \n",&saveptr);
+		pch = strtok_r (NULL, " \n" ,&saveptr);
 	}
 }
 
@@ -76,11 +76,11 @@ int main (int ac, char **av, char **env){
 	char *usrName;
 	char *path;
 	char hostname[200];*/
-	int ret = 0;
 	char *line = NULL;
 	size_t len = 0;
 	int i;
-	char cmd[200]; 
+	int err = 0;
+	char *cmd = malloc(200);
 	char **split = calloc (200, 1);
 
 	if (ac != 1 && av[0])
@@ -106,17 +106,16 @@ int main (int ac, char **av, char **env){
 			continue;
 		}
 		strcpy(cmd,split[0]);
-		if (execute(split,env) == - 1)
-		{
+		err = execute(split, env);
+		if (err == 127)
 			dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", av[0], cmd);
-			ret = 127;
-		}
 		for (i = 0; split[i]; i++)
 			free (split[i]);
 		memset(split, '\0', 200);
 		line[0] = 0;
-	}	
+	}
+	free (cmd);	
 	free(split);
 	free(line);
-	return (ret);
+	return (err);
 }
