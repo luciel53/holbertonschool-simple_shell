@@ -59,12 +59,8 @@ char *checkFile(char *File, char *PATH)
     	{
 		for (i = 0; i < strlen(File); i++)
 			ispath += (File[i] == '/');
-		if (!ispath)
-		{
-			free (File);
-			return (NULL);
-		}
-       		return (File);
+		if (ispath)
+       			return (File);
     	}
 	if (!PATH)
 	{
