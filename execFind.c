@@ -19,7 +19,18 @@ int execute (char **cmd, char **env)
 {
 	pid_t child_pid;
 	int status;
+	char *thisEnv;
+	char **en;
 
+	if (!strcmp(cmd[0], "env"))
+	{
+		for (en = env; *en != 0; en++)
+  		{
+    			thisEnv = *en;
+    			printf("%s\n", thisEnv);    
+  		}
+		return (0);
+	}
 	cmd[0] = checkFile(cmd[0], getenv("PATH"));
 	if (!cmd[0])
 	{
