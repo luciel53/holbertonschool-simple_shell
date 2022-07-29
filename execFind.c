@@ -61,11 +61,8 @@ int execute(char **cmd, char **env)
 char *checkFile(char *File, char *PATH)
 {
 	struct stat st;
-	char *res;
-	unsigned int i = 0;
-	int ispath = 0;
-	char *path;
-	unsigned int imax;
+	char *res, *path;
+	unsigned int i = 0, imax, ispath = 0;
 
 		if (stat(File, &st) == 0)
 		{
@@ -83,10 +80,8 @@ char *checkFile(char *File, char *PATH)
 	path = malloc(strlen(PATH) + 1);
 	strcpy(path, PATH);
 	for (i = 0; i < imax; i++)
-	{
 		if (path[i] == ':')
 			path[i] = '\0';
-	}
 	res = calloc(200, 1);
 	for (i = 0; i < imax && path[i]; i += strlen(path + i) + 1)
 	{
