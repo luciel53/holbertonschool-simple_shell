@@ -45,9 +45,9 @@ int execute (char **cmd, char **env)
 	{
 		execve(cmd[0], cmd, env);
 	}
-	wait(&status);
-	/*printf("%d",status);*/
-	return (status);
+	if (wait(&status))
+		return (2);
+	return (0);
 }
 
 /**
