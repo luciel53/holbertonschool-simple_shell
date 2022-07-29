@@ -51,7 +51,7 @@ char *checkFile(char *File, char *PATH)
    	char *res;
 	int i = 0;
 	char *path;
-	int imax = strlen(PATH); 
+	int imax; 
 
     	if (stat(File, &st) == 0)
     	{
@@ -62,6 +62,7 @@ char *checkFile(char *File, char *PATH)
 		free (File);
 		return (NULL);
 	}
+	imax = strlen(PATH);
 	path = malloc(strlen(PATH) + 1);
 	strcpy(path,PATH);
 	for (i = 0; i < imax; i++)
