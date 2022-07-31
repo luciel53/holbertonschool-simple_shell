@@ -1,8 +1,8 @@
 # C - Simple shell
----
 
 ## Description :
 This project consists to recreate a unix shell. It is a team project realized for the end of the first trimester of our first year at Holberton School.
+
 
 ## Tasks :
 
@@ -141,14 +141,22 @@ You don’t have to:
 When done, please add all urls below (blog post, LinkedIn post, etc.)
 
 
-## Compilation :
+## Installation and compilation :
 
- The shell will be compiled this way:
+To install our hsh shell, you have to clone our repository :
+
+    $ git clone https://github.com/luciel53/holbertonschool-simple_shell.git
+
+ Then, to compile your file, use the command below :
 
  `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
 
 
  ## Testing :
+
+To run the shell :
+
+`./hsh`
 
  The shell should work like this in interactive mode:
 
@@ -173,13 +181,27 @@ But also in non-interactive mode:
     hsh main.c shell.c test_ls_2
     $
 
+
 ## Examples :
 
 ![Image](https://zupimages.net/up/22/30/f7cz.png)
 
 ![Image](https://zupimages.net/up/22/30/w44s.png)
 
+
+## Files
+
+* main.h - That is the header file.
+* execFind.c - Containing a function that find a file and an other function that executes the program of the command given.
+* shell.c - That contains 3 functions. The principal function that simules the shell. A function that prepares the use of the command and
+a third function that cuts the string at spaces and line returns and put its result in an array.
+* README.md
+* man_1_simple_shell - The manpage of our shell.
+* AUTHORS
+
+
 ## Authors :
 
-Murdo Nicolai
-Lucie Leroty
+Murdo Nicolai, Lucie Leroty
+
+
