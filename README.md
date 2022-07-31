@@ -1,5 +1,4 @@
 # C - Simple shell
-
 ---
 
 ## Description :
@@ -176,7 +175,9 @@ But also in non-interactive mode:
 
 ## Examples :
 
+![Image]https://zupimages.net/viewer.php?id=22/30/f7cz.png
+
 ## Authors :
 
-Murdo Nicolai
+Murdo Nicolai    
 Lucie Leroty
