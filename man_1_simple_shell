@@ -1,0 +1,32 @@
+ss this file with
+.\" groff -man -Tascii
+.\"qq
+.TH hsh "2022/07/30" "V1.0" "Simple shell man page"
+
+.SH NAME
+hsh - C - Simple shell
+
+
+.SH DESCRIPTION
+A program that replicates a unix shell terminal.
+
+
+.SH SYNOPSIS
+
+.SH RETURN VALUE
+
+
+.SH FILES
+main.h, execFind.c, shell.c, README.md, AUTHORS
+
+.SH EXAMPLES
+To display the contains of a file, write:
+./hsh
+cat <filename>
+
+To display the list of all files in the current directory, write:
+./hsh
+ls -l
+
+.SH AUTHORS
+Murdo Nicolai, Lucie Leroty
