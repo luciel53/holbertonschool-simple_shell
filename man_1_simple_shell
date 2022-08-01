@@ -1,19 +1,17 @@
-ss this file with
 .\" groff -man -Tascii
 .\"qq
 .TH hsh "2022/07/30" "V1.0" "Simple shell man page"
 
 .SH NAME
-hsh - C - Simple shell
-
-
-.SH DESCRIPTION
-A program that replicates a unix shell terminal.
-
+.B hsh - C - Simple shell
 
 .SH SYNOPSIS
+.B ./hsh [command][arg]
 
-.SH RETURN VALUE
+.SH DESCRIPTION
+.B hsh is a unix command line interpreter. That replicates a unix shell terminal.
+It executes a command read from the terminal or a file.
+A command is composed of a first word that is (that is the name of the command to execute) and the next words are the arguments.
 
 
 .SH FILES
@@ -27,6 +25,9 @@ cat <filename>
 To display the list of all files in the current directory, write:
 ./hsh
 ls -l
+
+.SH BUGS
+No bugs known.
 
 .SH AUTHORS
 Murdo Nicolai, Lucie Leroty
