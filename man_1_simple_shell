@@ -9,16 +9,32 @@
 .B ./hsh [command][arg]
 
 .SH DESCRIPTION
+
 .B hsh is a unix command line interpreter. That replicates a unix shell terminal.
-It executes a command read from the terminal or a file.
-A command is composed of a first word that is (that is the name of the command to execute) and the next words are the arguments.
+.B It executes a command read from the terminal or a file.
+.B A command is composed of a first word that is (that is the name of the command to execute) and the next words are the arguments.
 
 
 .SH FILES
-main.h, execFind.c, shell.c, README.md, AUTHORS
+
+.B main.h, execFind.c, shell.c, README.md, AUTHORS
+
+.SH INSTALLATION
+
+.B To install:
+
+.B Clone the repository:
+
+.I $ git clone https://github.com/luciel53/holbertonschool-simple_shell.git
+
+.B To compile, use:
+
+.I gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 .SH EXAMPLES
-To display the contains of a file, write:
+
+To display the contain of a file, write:
+
 ./hsh
 cat <filename>
 
@@ -26,8 +42,15 @@ To display the list of all files in the current directory, write:
 ./hsh
 ls -l
 
+.SH EXIT STATUS
+
+If an error is detected, it returns a non-zero status. Otherwise, it returns
+the status of the last command executed.
+
 .SH BUGS
+
 No bugs known.
 
 .SH AUTHORS
+
 Murdo Nicolai, Lucie Leroty

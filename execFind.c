@@ -12,7 +12,7 @@
  * execute - A function that executes the program of the command given
  * @cmd: command
  * @env: double pointer to the environnement variable
- * Return: Always 0.
+ * Return: 0 or non zero if it fails.
  */
 
 int execute(char **cmd, char **env)

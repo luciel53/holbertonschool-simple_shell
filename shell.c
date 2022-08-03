@@ -62,7 +62,7 @@ void prepcmd(char *str, char **res)
 
 
 /**
- * main - A function that simukes the shell
+ * main - A function that simules the shell
  * @ac: argument count
  * @av: argument vector
  * @env: double pointer to the environnement variable
