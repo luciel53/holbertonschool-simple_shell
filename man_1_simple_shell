@@ -12,7 +12,7 @@
 
 .B hsh is a unix command line interpreter. That replicates a unix shell terminal.
 .B It executes a command read from the terminal or a file.
-.B A command is composed of a first word that is (that is the name of the command to execute) and the next words are the arguments.
+.B A command is composed of a first word (that is the name of the command to execute) and the next words are the arguments.
 
 
 .SH FILES
@@ -21,26 +21,41 @@
 
 .SH INSTALLATION
 
-.B To install:
+.B To install, clone the repository:
 
-.B Clone the repository:
-
-.I $ git clone https://github.com/luciel53/holbertonschool-simple_shell.git
+$ git clone https://github.com/luciel53/holbertonschool-simple_shell.git
 
 .B To compile, use:
 
-.I gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 .SH EXAMPLES
 
-To display the contain of a file, write:
+.B To display the contain of a file, write:
 
-./hsh
-cat <filename>
+.B ./hsh
+cat main.h
 
-To display the list of all files in the current directory, write:
-./hsh
+ #ifndef HEADER
+ #define HEADER
+ int execute(char **argv, char **env);
+ char *checkFile(char *File, char *path);
+ void strcut(char *str, char **res, int *p);
+ #endif
+
+.B To display the list of all files in the current directory, write:
+
+.B ./hsh
 ls -l
+
+ total 32
+ -rw-rw-r-- 1 lucie lucie   77 août   3 22:48 AUTHORS
+ -rw-rw-r-- 1 lucie lucie 1834 août   3 22:44 execFind.c
+ drwxrwxr-x 2 lucie lucie 4096 juil. 28 12:44 exercises
+ -rw-rw-r-- 1 lucie lucie  161 juil. 29 16:12 main.h
+ -rw-rw-r-- 1 lucie lucie 1237 août   4 16:54 man_1_simple_shell
+ -rw-rw-r-- 1 lucie lucie 7412 août   1 20:29 README.md
+ -rw-rw-r-- 1 lucie lucie 2097 août   3 22:43 shell.c
 
 .SH EXIT STATUS
 
