@@ -10,7 +10,7 @@
 
 .SH DESCRIPTION
 
-.B hsh is a unix command line interpreter. That replicates a unix shell terminal.
+.B hsh is a unix command line interpreter. That replicates a unix shell.
 .B It executes a command read from the terminal or a file.
 .B A command is composed of a first word (that is the name of the command to execute) and the next words are the arguments.
 
